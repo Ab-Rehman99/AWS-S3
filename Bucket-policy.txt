@@ -1,0 +1,31 @@
+// bucket policy to deny all the putting object operation whose encryption is not enabled through "s3:x-amz-server-side-encryption"
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1689857255812",
+    "Statement": [
+        {
+            "Sid": "Stmt1689857120853",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::demo-abdul-bucket-123/*",
+            "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+            }
+        },
+        {
+            "Sid": "Stmt1689857227076",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::demo-abdul-bucket-123/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+            }
+        }
+    ]
+}
